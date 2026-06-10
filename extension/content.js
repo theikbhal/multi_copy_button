@@ -468,8 +468,8 @@
       
       isMoving = false;
 
-      document.addEventListener("mouseup", dragEnd);
-      document.addEventListener("mousemove", dragMove);
+      window.addEventListener("mouseup", dragEnd, { capture: true });
+      window.addEventListener("mousemove", dragMove, { capture: true });
     }
 
     function dragMove(e) {
@@ -500,8 +500,8 @@
     }
 
     function dragEnd() {
-      document.removeEventListener("mouseup", dragEnd);
-      document.removeEventListener("mousemove", dragMove);
+      window.removeEventListener("mouseup", dragEnd, { capture: true });
+      window.removeEventListener("mousemove", dragMove, { capture: true });
 
       if (isMoving) {
         // Calculate percentages
@@ -527,11 +527,38 @@
 
   // Clipboard copies
   function copyToClipboard(text, name) {
-    navigator.clipboard.writeText(text).then(() => {
-      showToast(`Copied ${name}!`);
-    }).catch(err => {
-      console.error("Failed to copy snippet: ", err);
-    });
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied ${name}!`);
+      }).catch(err => {
+        console.warn("Clipboard API failed, running fallback: ", err);
+        fallbackCopyToClipboard(text, name);
+      });
+    } else {
+      fallbackCopyToClipboard(text, name);
+    }
+  }
+
+  function fallbackCopyToClipboard(text, name) {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      textarea.style.left = "-999999px";
+      textarea.style.top = "-999999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const success = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (success) {
+        showToast(`Copied ${name}!`);
+      } else {
+        alert(`Failed to copy snippet. Please copy manually.`);
+      }
+    } catch (err) {
+      console.error("Fallback copy failed: ", err);
+    }
   }
 
   // Toasts

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 1. Copy Clipboard Functionality
   function copyTextToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
+    const onSuccess = () => {
       showToast(`Copied snippet: "${text}"`);
       
       // Mark step 1 completed
@@ -41,9 +41,38 @@ document.addEventListener("DOMContentLoaded", () => {
         step1.classList.add("completed");
         step2.classList.add("active");
       }
-    }).catch(err => {
-      console.error("Could not copy text: ", err);
-    });
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(err => {
+        console.warn("Clipboard API failed on welcome page, trying fallback: ", err);
+        fallbackCopy(text, onSuccess);
+      });
+    } else {
+      fallbackCopy(text, onSuccess);
+    }
+  }
+
+  function fallbackCopy(text, onSuccessCallback) {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      textarea.style.left = "-999999px";
+      textarea.style.top = "-999999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const success = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (success) {
+        onSuccessCallback();
+      } else {
+        alert("Failed to copy. Please copy manually.");
+      }
+    } catch (err) {
+      console.error("Fallback welcome copy failed: ", err);
+    }
   }
 
   function showToast(message) {
