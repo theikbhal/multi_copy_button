@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Copy Button — Draggable Floating Clipboard Snippets Chrome Extension</title>
+  <meta name="description" content="Create custom, draggable floating copy buttons on any website to copy code snippets, templates, command lines and hex codes instantly with one click.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="space-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img src="assets/logo.png" alt="Multi Copy Button Logo">
+        <span>Multi Copy Button</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#demo">Live Demo</a>
+        <a href="#setup">Setup Guide</a>
+        <a href="https://github.com/theikbhal/multi_copy_button" target="_blank" class="github-link">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="#demo" class="nav-cta">Install Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-container">
+      <div class="hero-tag">🚀 Supercharge your clipboard</div>
+      <h1>The Floating Snippet<br><span class="gradient-text">Manager for Chrome</span></h1>
+      <p class="hero-description">Create custom, draggable floating copy buttons on any website. Save Git commands, color codes, email templates, and standard replies. Click once to copy instantly without switching tabs.</p>
+      <div class="hero-ctas">
+        <a href="#setup" class="btn btn-primary">Add to Chrome — It's Free</a>
+        <a href="#demo" class="btn btn-secondary">Try Live Demo</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Why it is helpful -->
+  <section class="features-section" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Built to Eliminate Repetitive Work</h2>
+        <p>Why waste time typing the same texts over and over? Multi Copy Button makes accessing your most valuable snippets effortless.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="card-icon">⚡</div>
+          <h3>Instant Clipboard Copy</h3>
+          <p>Clicking any floating button instantly copies its text to your clipboard. A visual toast confirms success.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="card-icon">🎛️</div>
+          <h3>Draggable Anywhere</h3>
+          <p>Drag buttons around freely on your page. The extension saves coordinates as percentages so they scale perfectly on window resize.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🔒</div>
+          <h3>Domain-locked Visiblity</h3>
+          <p>Configure snippets to float globally across all sites, or constrain them to specific URLs (e.g. only on GitHub or localhost).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="card-icon">🕶️</div>
+          <h3>Collapsible Control panel</h3>
+          <p>A sleek handle sits on the right edge of your browser. Slide it out to search snippets, toggle visibility, edit details, or create new ones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Sandbox Demo -->
+  <section class="demo-section" id="demo">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="badge">Interactive Sandbox</span>
+        <h2>Experience the Mechanics Live</h2>
+        <p>Interact with our custom floating buttons below. Drag them, click to copy, or use the creator form to float your own snippets!</p>
+      </div>
+
+      <div class="sandbox-container">
+        <!-- Interactive Workspace mimicking browser -->
+        <div class="browser-mock">
+          <div class="browser-header">
+            <div class="browser-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="browser-url-bar">https://my-workflow.dev/dashboard</div>
+          </div>
+          
+          <div class="browser-viewport" id="sandbox-viewport">
+            <div class="browser-empty-state">
+              <p>🌐 This is a mock developer sandbox page.</p>
+              <p class="hint">Try dragging the buttons on the right or click them to test the clipboard copy!</p>
+            </div>
+
+            <!-- Demo floating button 1 -->
+            <div class="demo-btn" id="demo-btn-1" style="left: 65%; top: 20%;">
+              <div class="drag-handle" title="Drag me">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9h14M5 15h14"/></svg>
+              </div>
+              <span class="btn-name">🚀 Prod Deploy</span>
+              <div class="tooltip">
+                <strong>Prod Deploy</strong>
+                <p>Click to copy command</p>
+                <div class="tooltip-text">vercel --prod</div>
+              </div>
+              <div class="actions">
+                <button class="act-btn edit-btn" title="Edit">✏️</button>
+                <button class="act-btn delete-btn" title="Hide">✕</button>
+              </div>
+            </div>
+
+            <!-- Demo floating button 2 -->
+            <div class="demo-btn" id="demo-btn-2" style="left: 65%; top: 40%;">
+              <div class="drag-handle" title="Drag me">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9h14M5 15h14"/></svg>
+              </div>
+              <span class="btn-name">🎨 Brand Color</span>
+              <div class="tooltip">
+                <strong>Brand Color</strong>
+                <p>Click to copy CSS Hex</p>
+                <div class="tooltip-text">#8B5CF6</div>
+              </div>
+              <div class="actions">
+                <button class="act-btn edit-btn" title="Edit">✏️</button>
+                <button class="act-btn delete-btn" title="Hide">✕</button>
+              </div>
+            </div>
+
+            <!-- Side Dock Mock -->
+            <div class="mock-dock-handle" id="mock-dock-handle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+            </div>
+
+            <div class="mock-dock" id="mock-dock">
+              <div class="dock-header">
+                <span>Dock Control Panel</span>
+                <button id="close-dock-btn">✕</button>
+              </div>
+              <div class="dock-body">
+                <input type="text" id="dock-search" placeholder="Search buttons..." class="dock-input">
+                <div class="dock-list-header">Active Snippets</div>
+                <div class="dock-list" id="dock-list-container">
+                  <!-- JS list -->
+                </div>
+              </div>
+            </div>
+
+            <div class="toast-popup" id="sandbox-toast">Copied to clipboard!</div>
+          </div>
+        </div>
+
+        <!-- Forms / Creator Box on the right -->
+        <div class="creator-sidebar">
+          <h3>Create Interactive Button</h3>
+          <p class="creator-desc">Create a new floating button to test on the mock browser workspace.</p>
+          <div class="creator-form">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" id="create-name" placeholder="e.g. Email signature" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Snippet Text</label>
+              <input type="text" id="create-text" placeholder="e.g. Best regards, John" class="form-input">
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <input type="text" id="create-notes" placeholder="Optional description..." class="form-input">
+            </div>
+            <button id="create-sandbox-btn" class="btn btn-primary btn-block">Add to Sandbox</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup Section -->
+  <section class="setup-section" id="setup">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Install and Load the Extension</h2>
+        <p>Since this extension is open source, you can load it directly from your computer in developer mode in a few quick steps:</p>
+      </div>
+
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-badge">1</div>
+          <h3>Clone the repository</h3>
+          <p>Get the source code onto your local machine:</p>
+          <pre class="code-block"><code>git clone https://github.com/theikbhal/multi_copy_button.git</code></pre>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-badge">2</div>
+          <h3>Open Extension Settings</h3>
+          <p>Launch Google Chrome, navigate to <code>chrome://extensions/</code>, and toggle <strong>"Developer mode"</strong> in the top-right corner.</p>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-badge">3</div>
+          <h3>Load Unpacked</h3>
+          <p>Click the <strong>"Load unpacked"</strong> button in the top-left, and select the <code>extension/</code> directory from the folder you cloned.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="cta-banner">
+    <div class="banner-container">
+      <h2>Ready to Supercharge Your Clipboard?</h2>
+      <p>Multi Copy Button is 100% free, runs completely locally, and never transmits your data.</p>
+      <a href="#setup" class="btn btn-primary lg">Load the Extension Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Logo">
+        <span>Multi Copy Button</span>
+      </div>
+      <p class="copyright">&copy; 2026 Multi Copy Button. Open source under the MIT License.</p>
+    </div>
+  </footer>
+
+  <!-- Sandbox Modal Edit -->
+  <div class="modal-overlay" id="sandbox-modal">
+    <div class="modal">
+      <h2>Edit Sandbox Snippet</h2>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="modal-name" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Snippet Text</label>
+        <textarea id="modal-text" rows="3" class="form-input"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="modal-notes" class="form-input">
+      </div>
+      <div class="modal-buttons">
+        <button id="modal-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="modal-save" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,624 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:host {
+  --mcb-bg: #0f172a;
+  --mcb-card-bg: rgba(30, 41, 59, 0.7);
+  --mcb-border: rgba(255, 255, 255, 0.08);
+  --mcb-text-primary: #f8fafc;
+  --mcb-text-secondary: #94a3b8;
+  --mcb-primary: #8b5cf6;
+  --mcb-primary-glow: rgba(139, 92, 246, 0.4);
+  --mcb-secondary: #06b6d4;
+  --mcb-success: #10b981;
+  --mcb-danger: #ef4444;
+  --mcb-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  font-family: var(--mcb-font);
+  color: var(--mcb-text-primary);
+}
+
+/* 1. Side Dock Handle */
+.mcb-dock-handle {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 90px;
+  background: linear-gradient(135deg, var(--mcb-primary) 0%, #6d28d9 100%);
+  border-radius: 12px 0 0 12px;
+  box-shadow: -4px 0 25px rgba(139, 92, 246, 0.4);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999990;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mcb-dock-handle:hover {
+  width: 48px;
+  box-shadow: -6px 0 30px rgba(139, 92, 246, 0.6);
+}
+
+.mcb-dock-handle svg {
+  color: white;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+}
+
+.mcb-dock-handle:hover svg {
+  transform: scale(1.1);
+}
+
+.mcb-dock-handle span {
+  font-size: 8px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* 2. Slide Out Dock */
+.mcb-dock {
+  position: fixed;
+  right: -360px;
+  top: 0;
+  width: 340px;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid var(--mcb-border);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+  z-index: 9999995;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.mcb-dock.open {
+  right: 0;
+}
+
+.mcb-dock-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--mcb-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mcb-dock-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mcb-dock-title img {
+  width: 24px;
+  height: 24px;
+}
+
+.mcb-dock-close {
+  background: none;
+  border: none;
+  color: var(--mcb-text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mcb-dock-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--mcb-text-primary);
+}
+
+.mcb-dock-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Search bar */
+.mcb-search-box {
+  position: relative;
+}
+
+.mcb-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--mcb-border);
+  border-radius: 8px;
+  padding: 10px 14px 10px 36px;
+  color: var(--mcb-text-primary);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.mcb-search-input:focus {
+  outline: none;
+  border-color: var(--mcb-primary);
+  box-shadow: 0 0 0 2px var(--mcb-primary-glow);
+}
+
+.mcb-search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mcb-text-secondary);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+/* Control actions buttons */
+.mcb-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.mcb-btn-secondary {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--mcb-border);
+  color: var(--mcb-text-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.mcb-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Snippets list */
+.mcb-list-title {
+  font-size: 12px;
+  color: var(--mcb-text-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.mcb-snippets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mcb-item {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid var(--mcb-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s;
+}
+
+.mcb-item:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(139, 92, 246, 0.25);
+}
+
+.mcb-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mcb-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--mcb-text-primary);
+}
+
+.mcb-item-text {
+  font-size: 11px;
+  color: var(--mcb-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: monospace;
+  margin-top: 2px;
+}
+
+.mcb-item-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.mcb-item-btn {
+  background: none;
+  border: none;
+  color: var(--mcb-text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mcb-item-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--mcb-text-primary);
+}
+
+.mcb-item-btn.mcb-delete:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--mcb-danger);
+}
+
+.mcb-empty-state {
+  text-align: center;
+  padding: 24px;
+  color: var(--mcb-text-secondary);
+  font-size: 12px;
+}
+
+/* Snippet Creator Form in Dock */
+.mcb-creator-box {
+  background: rgba(30, 41, 59, 0.2);
+  border: 1px solid var(--mcb-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mcb-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mcb-form-group label {
+  font-size: 11px;
+  color: var(--mcb-text-secondary);
+  font-weight: 600;
+}
+
+.mcb-input, .mcb-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--mcb-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: white;
+  font-size: 12px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.mcb-input:focus, .mcb-textarea:focus {
+  outline: none;
+  border-color: var(--mcb-primary);
+}
+
+.mcb-checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.mcb-checkbox-group input {
+  margin: 0;
+  cursor: pointer;
+}
+
+.mcb-checkbox-group label {
+  font-size: 11px;
+  color: var(--mcb-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.mcb-btn-primary {
+  background: linear-gradient(135deg, var(--mcb-primary) 0%, #6d28d9 100%);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);
+}
+
+.mcb-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(139, 92, 246, 0.35);
+}
+
+.mcb-dock-footer {
+  padding: 15px 20px;
+  border-top: 1px solid var(--mcb-border);
+  display: flex;
+  justify-content: center;
+}
+
+.mcb-help-link {
+  font-size: 12px;
+  color: var(--mcb-primary);
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mcb-help-link:hover {
+  color: #a78bfa;
+  text-decoration: underline;
+}
+
+/* 3. Floating copy-buttons on webpage */
+.mcb-float-btn {
+  position: fixed;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 8px 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  max-width: 250px;
+  z-index: 9999980;
+  box-sizing: border-box;
+}
+
+.mcb-float-btn:hover {
+  border-color: var(--mcb-primary);
+  box-shadow: 0 0 15px var(--mcb-primary-glow);
+  transform: translateY(-1px);
+}
+
+.mcb-float-btn:active {
+  transform: scale(0.98);
+}
+
+.mcb-drag-handle {
+  cursor: grab;
+  color: var(--mcb-text-secondary);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.mcb-drag-handle:active {
+  cursor: grabbing;
+}
+
+.mcb-drag-handle svg {
+  width: 12px;
+  height: 12px;
+}
+
+.mcb-btn-name {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mcb-float-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mcb-float-btn:hover .mcb-float-actions {
+  opacity: 1;
+}
+
+.mcb-float-action-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mcb-text-secondary);
+  font-size: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.mcb-float-action-btn:hover {
+  background: var(--mcb-primary);
+  color: white;
+}
+
+.mcb-float-action-btn.mcb-close:hover {
+  background: var(--mcb-danger);
+}
+
+/* Tooltip / Notes in Floating Button */
+.mcb-tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  width: 180px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  z-index: 9999989;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.mcb-float-btn:hover .mcb-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mcb-tooltip strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: var(--mcb-secondary);
+}
+
+.mcb-tooltip p {
+  color: var(--mcb-text-secondary);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.mcb-tooltip-text {
+  font-family: monospace;
+  background: rgba(0,0,0,0.25);
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #e2e8f0;
+  word-break: break-all;
+  max-height: 60px;
+  overflow-y: auto;
+}
+
+/* 4. Modal Overlay & Form inside webpage */
+.mcb-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  box-sizing: border-box;
+}
+
+.mcb-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mcb-modal {
+  background: #1e293b;
+  border: 1px solid var(--mcb-border);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  box-sizing: border-box;
+}
+
+.mcb-modal-overlay.open .mcb-modal {
+  transform: translateY(0);
+}
+
+.mcb-modal h2 {
+  font-size: 18px;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.mcb-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.mcb-modal-buttons button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+/* 5. Custom copy confirmation toast */
+.mcb-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--mcb-success);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  z-index: 9999998;
+}
+
+.mcb-toast.open {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

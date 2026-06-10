@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Copy Button Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo-area">
+        <img src="icons/icon-48.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Multi Copy Button</span>
+      </div>
+      <button class="settings-btn" id="open-welcome-btn" title="Open Help Page">📖</button>
+    </header>
+
+    <main class="popup-main">
+      <!-- Search -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="popup-search" placeholder="Search snippets...">
+      </div>
+
+      <!-- Quick Stats & Toggle -->
+      <div class="stats-row">
+        <div class="stat-badge">
+          <span class="stat-label">Total Snippets</span>
+          <span class="stat-val" id="total-count">0</span>
+        </div>
+        <button class="toggle-all-btn" id="global-toggle">
+          <span id="toggle-icon">👁️</span>
+          <span id="toggle-text">Hide All</span>
+        </button>
+      </div>
+
+      <!-- Snippet List -->
+      <div class="snippets-container">
+        <h3>Quick Snippets (Click to Copy)</h3>
+        <div class="popup-list" id="popup-list">
+          <!-- Snippets loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Quick Add Form -->
+      <div class="quick-add-box">
+        <h4>⚡ Add Quick Snippet</h4>
+        <input type="text" id="add-name" placeholder="Name" class="quick-input">
+        <input type="text" id="add-text" placeholder="Snippet text to copy" class="quick-input">
+        <button id="add-btn" class="quick-add-btn">Add Snippet</button>
+      </div>
+    </main>
+
+    <footer class="popup-footer">
+      <span>Active and ready on your tabs</span>
+      <div class="toast" id="popup-toast">Copied!</div>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

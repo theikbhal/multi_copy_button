@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Multi Copy Button</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+  
+  <div class="container">
+    <header class="header">
+      <div class="logo-area">
+        <img src="icons/icon-128.png" alt="Multi Copy Button Logo" class="logo-img">
+        <span class="logo-text">Multi Copy Button</span>
+      </div>
+      <h1>Accelerate Your Workflow</h1>
+      <p class="subtitle">Welcome! You've successfully installed the extension. Let's get you set up in less than 60 seconds.</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Why it is helpful section -->
+      <section class="benefits-section">
+        <h2>Why is Multi Copy Button a Game-Changer?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">⏱️</div>
+            <h3>Eliminate Repetitive Work</h3>
+            <p>Save Git commands, email replies, hex codes, or templates. Stop typing or searching for them over and over.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">⚡</div>
+            <h3>One-Click Copy</h3>
+            <p>A single click on any floating button copies its text to your clipboard. No manual selecting or hotkeys needed.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🎯</div>
+            <h3>Zero Context Switching</h3>
+            <p>Buttons hover right on the pages you are browsing. Access your snippets without swapping tabs or opening notes apps.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">🔍</div>
+            <h3>Organized & Searchable</h3>
+            <p>Search snippets instantly by their name or description in your floating dock. Toggle visibility whenever you need clean space.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Onboarding Demo Section -->
+      <section class="onboarding-demo-box">
+        <div class="demo-header">
+          <span class="badge">Interactive Demo</span>
+          <h2>Try it Out Right Now!</h2>
+          <p>This is a live preview of how the floating buttons work. Go through the steps below:</p>
+        </div>
+
+        <div class="onboarding-steps">
+          <div class="step-card active" id="step-1">
+            <div class="step-num">1</div>
+            <h3>Click to Copy</h3>
+            <p>Click the purple button floating on the right side. It will copy the text and show a success confirmation!</p>
+          </div>
+          
+          <div class="step-card" id="step-2">
+            <div class="step-num">2</div>
+            <h3>Drag & Position</h3>
+            <p>Hold the drag handle of the floating button and move it anywhere on the page to customize your layout.</p>
+          </div>
+
+          <div class="step-card" id="step-3">
+            <div class="step-num">3</div>
+            <h3>Create a Snippet</h3>
+            <p>Use the panel below to add a new custom button. It will float on this page instantly!</p>
+          </div>
+        </div>
+
+        <div class="demo-workspace" id="demo-workspace">
+          <!-- The floating button will be placed here -->
+          <div class="floating-btn-demo" id="demo-float-btn" style="right: 40px; top: 180px;">
+            <div class="drag-handle" id="demo-drag-handle">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9h14M5 15h14"/></svg>
+            </div>
+            <span class="btn-name">🚀 Deploy Command</span>
+            <div class="btn-tooltip">
+              <strong>Deploy Command</strong>
+              <p>Double click or hover to edit. Click to copy.</p>
+              <div class="btn-text">vercel --prod</div>
+            </div>
+            <div class="btn-actions">
+              <button class="action-btn edit-btn" title="Edit">✏️</button>
+              <button class="action-btn delete-btn" title="Delete">✕</button>
+            </div>
+          </div>
+          
+          <div class="toast-notification" id="demo-toast">Copied to clipboard!</div>
+        </div>
+
+        <!-- Mini button creator in demo -->
+        <div class="demo-creator">
+          <h3>Create a Test Button</h3>
+          <div class="creator-fields">
+            <input type="text" id="demo-name-in" placeholder="Button Name (e.g. My Hex)" class="demo-input">
+            <input type="text" id="demo-text-in" placeholder="Text to copy (e.g. #FF5733)" class="demo-input">
+            <input type="text" id="demo-notes-in" placeholder="Optional notes/description..." class="demo-input">
+            <button id="demo-add-btn" class="glow-button">Add Button</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ready to go section -->
+      <section class="ready-section">
+        <h2>You are Ready to Roll!</h2>
+        <p>The extension is already active. Go to any website (e.g., GitHub, StackOverflow, or your work portal), and click the small edge tab on the right side of the screen to open your Multi Copy Button side dock.</p>
+        <div class="cta-row">
+          <button id="close-welcome" class="glow-button primary">Got it, let's start!</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 Multi Copy Button. Built to supercharge productivity.</p>
+    </footer>
+  </div>
+
+  <!-- Edit Modal for Demo -->
+  <div class="modal-overlay" id="demo-modal">
+    <div class="modal">
+      <h2>Edit Snippet</h2>
+      <div class="form-group">
+        <label for="edit-name">Name</label>
+        <input type="text" id="edit-name">
+      </div>
+      <div class="form-group">
+        <label for="edit-text">Snippet Text (to copy)</label>
+        <textarea id="edit-text" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="edit-notes">Notes / Tooltip</label>
+        <input type="text" id="edit-notes">
+      </div>
+      <div class="modal-buttons">
+        <button id="cancel-edit" class="btn-secondary">Cancel</button>
+        <button id="save-edit" class="btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
