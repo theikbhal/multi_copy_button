@@ -336,7 +336,10 @@
         </div>
 
         <!-- Scrollable List -->
-        <span class="form-title" style="margin-bottom: 2px;">Your Copy Buttons</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2px;">
+          <span class="form-title">Your Copy Buttons</span>
+          ${state.snippets.length > 0 ? `<button id="btn-clear-all" class="btn-card delete-action" style="padding: 2px 6px;">Clear All</button>` : ''}
+        </div>
         <div class="snippets-list">
           ${renderSnippetsListHTML()}
         </div>
@@ -499,6 +502,18 @@
         }
       });
     });
+
+    // Clear All button
+    const btnClearAll = dashboard.querySelector("#btn-clear-all");
+    if (btnClearAll) {
+      btnClearAll.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete all copy buttons? This cannot be undone.")) {
+          state.snippets = [];
+          saveState();
+          render();
+        }
+      });
+    }
 
     // 5. Edit mode triggers
     const editBtns = dashboard.querySelectorAll(".btn-edit-snippet");
