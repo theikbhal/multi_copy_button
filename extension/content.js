@@ -7,12 +7,13 @@
   // 1. Create Shadow Host and shadow root
   const host = document.createElement("div");
   host.id = "mcb-shadow-host";
-  host.style.position = "absolute";
+  host.style.position = "fixed";
   host.style.top = "0";
   host.style.left = "0";
-  host.style.width = "0";
-  host.style.height = "0";
-  host.style.zIndex = "9999999";
+  host.style.width = "100vw";
+  host.style.height = "100vh";
+  host.style.pointerEvents = "none";
+  host.style.zIndex = "2147483647";
   document.body.appendChild(host);
 
   const shadowRoot = host.attachShadow({ mode: "open" });
