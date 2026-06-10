@@ -307,6 +307,13 @@
   white-space: pre-wrap;
   color: #CBD5E1;
   border: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.card-body:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .card-actions {

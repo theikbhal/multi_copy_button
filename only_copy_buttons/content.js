@@ -222,7 +222,8 @@
     float: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path></svg>`,
     trash: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path></svg>`,
     edit: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path></svg>`,
-    check: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`
+    check: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`,
+    copy: `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`
   };
 
   // --- MAIN RENDER ---
@@ -414,8 +415,9 @@
                 ${SVG_ICONS.float} <span>${snip.visible ? "Dock" : "Float"}</span>
               </button>
             </div>
-            <div class="card-body">${escapeHTML(snip.copyText)}</div>
+            <div class="card-body" title="Click to copy text">${escapeHTML(snip.copyText)}</div>
             <div class="card-actions">
+              <button class="btn-card btn-copy-snippet" data-id="${snip.id}">${SVG_ICONS.copy} Copy</button>
               <button class="btn-card btn-edit-snippet" data-id="${snip.id}">${SVG_ICONS.edit} Edit</button>
               <button class="btn-card delete-action btn-delete-snippet" data-id="${snip.id}">${SVG_ICONS.trash} Delete</button>
             </div>
@@ -560,6 +562,46 @@
         render();
       });
     }
+
+    // 6. Copy button clicks
+    const copyBtns = dashboard.querySelectorAll(".btn-copy-snippet");
+    copyBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        const snip = state.snippets.find(s => s.id === id);
+        if (snip) {
+          copyTextToClipboard(snip.copyText)
+            .then(() => {
+              const originalLabel = btn.innerHTML;
+              btn.innerHTML = `${SVG_ICONS.check} Copied`;
+              setTimeout(() => { btn.innerHTML = originalLabel; }, 1000);
+            });
+        }
+      });
+    });
+
+    // 7. Clickable card body text
+    const cardBodies = dashboard.querySelectorAll(".card-body");
+    cardBodies.forEach(body => {
+      body.addEventListener("click", () => {
+        const card = body.closest(".snippet-card");
+        const id = card.getAttribute("data-id");
+        const snip = state.snippets.find(s => s.id === id);
+        if (snip) {
+          copyTextToClipboard(snip.copyText)
+            .then(() => {
+              const originalBg = body.style.backgroundColor;
+              const originalBorder = body.style.borderColor;
+              body.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+              body.style.borderColor = "var(--color-success)";
+              setTimeout(() => {
+                body.style.backgroundColor = originalBg;
+                body.style.borderColor = originalBorder;
+              }, 600);
+            });
+        }
+      });
+    });
   }
 
   // --- FLOATING COPY PILLS INJECTION ---
